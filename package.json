@@ -1,0 +1,30 @@
+{
+  "name": "campeonato-volei",
+  "version": "1.0.0",
+  "description": "Sistema web para o controle de equipes x jogadores",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giovannadeandrade/campeonato-volei.git"
+  },
+  "author": "Giovanna de Andrade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giovannadeandrade/campeonato-volei/issues"
+  },
+  "homepage": "https://github.com/giovannadeandrade/campeonato-volei#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1"
+  }
+}
+
+
+

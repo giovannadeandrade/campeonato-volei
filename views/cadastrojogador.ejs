@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Jogador - Campeonato de Vôlei</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Cadastro de Jogador</h1>
+            
+            <% if (equipes.length === 0) { %>
+                <div class="header-info">
+                    <p>É necessário cadastrar pelo menos uma equipe antes de cadastrar jogadores.</p>
+                </div>
+                <div class="nav-links">
+                    <a href="/cadastro-equipe" class="btn">Cadastrar Equipe</a>
+                    <a href="/menu" class="btn btn-secondary">Voltar ao Menu</a>
+                </div>
+            <% } else { %>
+                <% if (erros && erros.length > 0) { %>
+                    <div class="erro-msg">
+                        <ul>
+                            <% erros.forEach(erro => { %>
+                                <li><%= erro %></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% } %>
+                
+                <form method="POST" action="/salvar-jogador">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="nome" 
+                               placeholder="Digite o nome completo do jogador" 
+                               value="<%= dados ? dados.nome || '' : '' %>" 
+                               required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="numero">Número da Camisa:</label>
+                        <input type="number" id="numero" name="numero" 
+                               placeholder="Digite o número da camisa" 
+                               min="1" max="99" 
+                               value="<%= dados ? dados.numero || '' : '' %>" 
+                               required>
+                        <small>Números de 1 a 99</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nascimento">Data de Nascimento:</label>
+                        <input type="date" id="nascimento" name="nascimento" 
+                               value="<%= dados ? dados.nascimento || '' : '' %>" 
+                               required>
+                        <small>Idade mínima: 16 anos</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="altura">Altura (cm):</label>
+                        <input type="number" id="altura" name="altura" 
+                               placeholder="Digite a altura em centímetros" 
+                               min="150" max="220" 
+                               value="<%= dados ? dados.altura || '' : '' %>" 
+                               required>
+                        <small>Entre 150 e 220 centímetros</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="genero">Gênero:</label>
+                        <select id="genero" name="genero" required>
+                            <option value="">Selecione o gênero</option>
+                            <option value="Masculino" <%= dados && dados.genero === 'Masculino' ? 'selected' : '' %>>Masculino</option>
+                            <option value="Feminino" <%= dados && dados.genero === 'Feminino' ? 'selected' : '' %>>Feminino</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="posicao">Posição:</label>
+                        <select id="posicao" name="posicao" required>
+                            <option value="">Selecione a posição</option>
+                            <option value="Levantador" <%= dados && dados.posicao === 'Levantador' ? 'selected' : '' %>>Levantador</option>
+                            <option value="Oposto" <%= dados && dados.posicao === 'Oposto' ? 'selected' : '' %>>Oposto</option>
+                            <option value="Central" <%= dados && dados.posicao === 'Central' ? 'selected' : '' %>>Central</option>
+                            <option value="Ponteiro" <%= dados && dados.posicao === 'Ponteiro' ? 'selected' : '' %>>Ponteiro</option>
+                            <option value="Líbero" <%= dados && dados.posicao === 'Líbero' ? 'selected' : '' %>>Líbero</option>
+                        </select>
+                        <small>Máximo 2 líberos por equipe</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="equipe">Equipe:</label>
+                        <select id="equipe" name="equipe" required>
+                            <option value="">Selecione a equipe</option>
+                            <% equipes.forEach(equipe => { %>
+                                <option value="<%= equipe.nome %>" <%= dados && dados.equipe === equipe.nome ? 'selected' : '' %>><%= equipe.nome %></option>
+                            <% }) %>
+                        </select>
+                        <small>Máximo 12 jogadores por equipe</small>
+                    </div>
+                    
+                    <div class="nav-links">
+                        <button type="submit" class="btn">Salvar Jogador</button>
+                        <a href="/menu" class="btn btn-secondary">Voltar ao Menu</a>
+                    </div>
+                </form>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

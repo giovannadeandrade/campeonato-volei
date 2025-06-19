@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipes Cadastradas - Campeonato de Vôlei</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card card-wide">
+            <h1>Equipes Cadastradas</h1>
+            
+            <% if (equipes.length > 0) { %>
+                <div class="data-list">
+                    <ul>
+                        <% equipes.forEach(equipe => { %>
+                            <li>
+                                <strong><%= equipe.nome %></strong><br>
+                                <span>Técnico: <%= equipe.tecnico %></span><br>
+                                <span>Telefone: <%= equipe.telefone %></span>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            <% } else { %>
+                <div class="header-info">
+                    <p>Nenhuma equipe cadastrada ainda.</p>
+                </div>
+            <% } %>
+            
+            <div class="nav-links">
+                <a href="/cadastro-equipe" class="btn">Cadastrar Nova Equipe</a>
+                <a href="/menu" class="btn btn-secondary">Voltar ao Menu</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogadores Cadastrados - Campeonato de Vôlei</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card card-wide">
+            <h1>Jogadores por Equipe</h1>
+            
+            <% if (equipes.length === 0) { %>
+                <div class="header-info">
+                    <p>Nenhuma equipe cadastrada ainda.</p>
+                </div>
+            <% } else { %>
+                <% equipes.forEach(equipe => { %>
+                    <div class="data-list">
+                        <h2><%= equipe.nome %></h2>
+                        <% 
+                            const jogadoresDaEquipe = jogadores.filter(j => j.equipe === equipe.nome);
+                        %>
+                        
+                        <% if (jogadoresDaEquipe.length > 0) { %>
+                            <ul>
+                                <% jogadoresDaEquipe.forEach(jogador => { %>
+                                    <li>
+                                        <strong><%= jogador.nome %></strong> - Nº <%= jogador.numero %><br>
+                                        <span>Posição: <%= jogador.posicao %></span> | 
+                                        <span>Altura: <%= jogador.altura %>cm</span> | 
+                                        <span>Gênero: <%= jogador.genero %></span><br>
+                                        <span>Nascimento: <%= new Date(jogador.nascimento).toLocaleDateString('pt-BR') %></span>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p style="color: var(--white); text-align: center; padding: 20px;">
+                                Nenhum jogador cadastrado nesta equipe.
+                            </p>
+                        <% } %>
+                    </div>
+                <% }) %>
+            <% } %>
+            
+            <div class="nav-links">
+                <a href="/cadastro-jogador" class="btn">Cadastrar Novo Jogador</a>
+                <a href="/menu" class="btn btn-secondary">Voltar ao Menu</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
